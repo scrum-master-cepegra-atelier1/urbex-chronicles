@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contents",
+  "info": {
+    "singularName": "content",
+    "pluralName": "contents",
+    "displayName": "Content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "description": {
+      "type": "text",
+      "minLength": 25,
+      "required": true
+    },
+    "lat": {
+      "type": "decimal",
+      "required": true
+    },
+    "long": {
+      "type": "decimal",
+      "required": true
+    },
+    "treshold": {
+      "type": "integer",
+      "required": true,
+      "min": 3
+    },
+    "file_img": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "file_video": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "files",
+        "videos"
+      ]
+    },
+    "file_audio": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "files",
+        "audios"
+      ]
+    },
+    "urls": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::url.url",
+      "mappedBy": "content"
+    },
+    "type": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::type.type",
+      "inversedBy": "contents"
+    }
+  }
+}
