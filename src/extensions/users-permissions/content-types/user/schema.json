@@ -83,6 +83,9 @@
       "relation": "manyToMany",
       "target": "api::circuit.circuit",
       "mappedBy": "users_permissions_users"
+    },
+    "experience": {
+      "type": "biginteger"
     }
   }
 }
