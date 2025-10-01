@@ -20,18 +20,6 @@
     "experience": {
       "type": "biginteger",
       "required": true
-    },
-    "users": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "achievements"
-    },
-    "mission": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::mission.mission",
-      "inversedBy": "achievements"
     }
   }
 }

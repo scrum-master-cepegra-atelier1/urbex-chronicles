@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_adress_addresses",
+  "info": {
+    "displayName": "Address"
+  },
+  "options": {},
+  "attributes": {
+    "city": {
+      "type": "string"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

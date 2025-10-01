@@ -16,18 +16,6 @@
       "minLength": 2,
       "required": true,
       "unique": true
-    },
-    "user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "accessibilities"
-    },
-    "circuits": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::circuit.circuit",
-      "mappedBy": "accessibilities"
     }
   }
 }

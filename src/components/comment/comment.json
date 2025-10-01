@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_comment_comments",
+  "info": {
+    "displayName": "Comment"
+  },
+  "options": {},
+  "attributes": {
+    "user_name": {
+      "type": "string"
+    },
+    "content": {
+      "type": "text"
+    },
+    "comment_at": {
+      "type": "datetime"
+    }
+  },
+  "config": {}
+}

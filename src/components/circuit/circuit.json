@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_circuit_circuits",
+  "info": {
+    "displayName": "Circuit"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "media": {
+      "type": "component",
+      "component": "media.media",
+      "repeatable": false
+    },
+    "address": {
+      "type": "component",
+      "component": "adress.address",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}
