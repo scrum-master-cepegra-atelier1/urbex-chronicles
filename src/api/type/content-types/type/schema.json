@@ -16,18 +16,6 @@
       "minLength": 3,
       "required": true,
       "unique": true
-    },
-    "contents": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::content.content",
-      "mappedBy": "type"
-    },
-    "missions": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::mission.mission",
-      "mappedBy": "type"
     }
   }
 }

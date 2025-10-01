@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_accessibility_accessibilities",
+  "info": {
+    "displayName": "accessibilities"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "config": {}
+}

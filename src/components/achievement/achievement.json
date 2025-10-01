@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_achievement_achievements",
+  "info": {
+    "displayName": "Achievement"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "xp": {
+      "type": "biginteger"
+    },
+    "badge": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}
