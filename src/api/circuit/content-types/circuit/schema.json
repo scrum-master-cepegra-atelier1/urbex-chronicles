@@ -17,10 +17,18 @@
     "description": {
       "type": "text"
     },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
     "duration": {
       "type": "biginteger"
     },
-    "Missions": {
+    "missions": {
       "type": "component",
       "component": "mission.mission",
       "repeatable": true

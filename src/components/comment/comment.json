@@ -5,6 +5,13 @@
   },
   "options": {},
   "attributes": {
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
     "user_name": {
       "type": "string"
     },

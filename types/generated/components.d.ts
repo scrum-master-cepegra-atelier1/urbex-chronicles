@@ -16,7 +16,7 @@ export interface AchievementAchievement extends Struct.ComponentSchema {
     displayName: 'Achievement';
   };
   attributes: {
-    badge: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    badge: Schema.Attribute.Media<'images'>;
     name: Schema.Attribute.String;
     xp: Schema.Attribute.BigInteger;
   };
@@ -52,6 +52,7 @@ export interface CommentComment extends Struct.ComponentSchema {
     displayName: 'Comment';
   };
   attributes: {
+    avatar: Schema.Attribute.Media<'images'>;
     comment_at: Schema.Attribute.DateTime;
     content: Schema.Attribute.Text;
     user_name: Schema.Attribute.String;
@@ -64,12 +65,9 @@ export interface MediaMedia extends Struct.ComponentSchema {
     displayName: 'Media';
   };
   attributes: {
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    song: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    video: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image: Schema.Attribute.Media<'images'>;
+    song: Schema.Attribute.Media<'audios', true>;
+    video: Schema.Attribute.Media<'videos'>;
   };
 }
 
@@ -97,6 +95,8 @@ export interface TypeType extends Struct.ComponentSchema {
   };
   attributes: {
     name: Schema.Attribute.String;
+    typeOf: Schema.Attribute.Enumeration<['text', 'sphere', 'sound']> &
+      Schema.Attribute.DefaultTo<'text'>;
   };
 }
 

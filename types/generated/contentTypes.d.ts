@@ -523,9 +523,10 @@ export interface ApiCircuitCircuit extends Struct.CollectionTypeSchema {
       'api::circuit.circuit'
     > &
       Schema.Attribute.Private;
-    Missions: Schema.Attribute.Component<'mission.mission', true>;
+    missions: Schema.Attribute.Component<'mission.mission', true>;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    thumbnail: Schema.Attribute.Media<'images'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -543,7 +544,7 @@ export interface ApiMissionMission extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    achievments: Schema.Attribute.Component<'achievement.achievement', true>;
+    achievements: Schema.Attribute.Component<'achievement.achievement', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -558,13 +559,13 @@ export interface ApiMissionMission extends Struct.CollectionTypeSchema {
     longitude: Schema.Attribute.Decimal;
     media: Schema.Attribute.Component<'media.media', false>;
     publishedAt: Schema.Attribute.DateTime;
+    threshold: Schema.Attribute.Integer;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 5;
       }>;
-    treshold: Schema.Attribute.Integer;
     types: Schema.Attribute.Component<'type.type', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -596,6 +597,8 @@ export interface ApiTypeType extends Struct.CollectionTypeSchema {
         minLength: 3;
       }>;
     publishedAt: Schema.Attribute.DateTime;
+    typeOf: Schema.Attribute.Enumeration<['text', 'sphere', 'sound']> &
+      Schema.Attribute.DefaultTo<'text'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1064,6 +1067,7 @@ export interface PluginUsersPermissionsUser
       true
     >;
     achievements: Schema.Attribute.Component<'achievement.achievement', true>;
+    avatar: Schema.Attribute.Media<'images'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1077,7 +1081,14 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    experience: Schema.Attribute.BigInteger;
+    experience: Schema.Attribute.BigInteger &
+      Schema.Attribute.SetMinMax<
+        {
+          min: '0';
+        },
+        string
+      > &
+      Schema.Attribute.DefaultTo<'0'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1096,6 +1107,7 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

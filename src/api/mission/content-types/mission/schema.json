@@ -26,7 +26,7 @@
     "longitude": {
       "type": "decimal"
     },
-    "treshold": {
+    "threshold": {
       "type": "integer"
     },
     "media": {
@@ -34,7 +34,7 @@
       "component": "media.media",
       "repeatable": false
     },
-    "achievments": {
+    "achievements": {
       "type": "component",
       "component": "achievement.achievement",
       "repeatable": true

@@ -66,8 +66,20 @@
       "inversedBy": "users",
       "configurable": false
     },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
     "experience": {
-      "type": "biginteger"
+      "type": "biginteger",
+      "default": "0",
+      "min": "0"
     },
     "accessibility": {
       "type": "component",

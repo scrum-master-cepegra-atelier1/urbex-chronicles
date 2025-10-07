@@ -7,6 +7,15 @@
   "attributes": {
     "name": {
       "type": "string"
+    },
+    "typeOf": {
+      "type": "enumeration",
+      "default": "text",
+      "enum": [
+        "text",
+        "sphere",
+        "sound"
+      ]
     }
   },
   "config": {}
