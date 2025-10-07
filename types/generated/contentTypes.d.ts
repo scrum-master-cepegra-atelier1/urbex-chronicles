@@ -442,7 +442,6 @@ export interface ApiAccessibilityAccessibility
     draftAndPublish: true;
   };
   attributes: {
-    circuits: Schema.Attribute.Relation<'manyToMany', 'api::circuit.circuit'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -462,10 +461,6 @@ export interface ApiAccessibilityAccessibility
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -490,7 +485,6 @@ export interface ApiAchievementAchievement extends Struct.CollectionTypeSchema {
       'api::achievement.achievement'
     > &
       Schema.Attribute.Private;
-    mission: Schema.Attribute.Relation<'manyToOne', 'api::mission.mission'>;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -501,50 +495,6 @@ export interface ApiAchievementAchievement extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users: Schema.Attribute.Relation<
-      'manyToMany',
-      'plugin::users-permissions.user'
-    >;
-  };
-}
-
-export interface ApiAddressAddress extends Struct.CollectionTypeSchema {
-  collectionName: 'addresses';
-  info: {
-    displayName: 'Address';
-    pluralName: 'addresses';
-    singularName: 'address';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    city: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 3;
-      }>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::address.address'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    zip: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 4;
-        minLength: 4;
-      }>;
   };
 }
 
@@ -559,75 +509,26 @@ export interface ApiCircuitCircuit extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    accessibilities: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::accessibility.accessibility'
-    >;
+    address: Schema.Attribute.Component<'adress.address', false>;
+    comments: Schema.Attribute.Component<'comment.comment', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    duration: Schema.Attribute.BigInteger;
+    like: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::circuit.circuit'
     > &
       Schema.Attribute.Private;
-    missions: Schema.Attribute.Relation<'oneToMany', 'api::mission.mission'>;
+    Missions: Schema.Attribute.Component<'mission.mission', true>;
+    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users_permissions_users: Schema.Attribute.Relation<
-      'manyToMany',
-      'plugin::users-permissions.user'
-    >;
-  };
-}
-
-export interface ApiContentContent extends Struct.CollectionTypeSchema {
-  collectionName: 'contents';
-  info: {
-    displayName: 'Content';
-    pluralName: 'contents';
-    singularName: 'content';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 25;
-      }>;
-    file_audio: Schema.Attribute.Media<'files' | 'audios', true>;
-    file_img: Schema.Attribute.Media<'images' | 'files', true>;
-    file_video: Schema.Attribute.Media<'files' | 'videos', true>;
-    lat: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::content.content'
-    > &
-      Schema.Attribute.Private;
-    long: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    treshold: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 3;
-        },
-        number
-      >;
-    type: Schema.Attribute.Relation<'manyToOne', 'api::type.type'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    urls: Schema.Attribute.Relation<'oneToMany', 'api::url.url'>;
   };
 }
 
@@ -642,20 +543,20 @@ export interface ApiMissionMission extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    achievements: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::achievement.achievement'
-    >;
-    circuit: Schema.Attribute.Relation<'manyToOne', 'api::circuit.circuit'>;
+    achievments: Schema.Attribute.Component<'achievement.achievement', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    latitude: Schema.Attribute.Decimal;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::mission.mission'
     > &
       Schema.Attribute.Private;
+    longitude: Schema.Attribute.Decimal;
+    media: Schema.Attribute.Component<'media.media', false>;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -663,7 +564,8 @@ export interface ApiMissionMission extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 5;
       }>;
-    type: Schema.Attribute.Relation<'manyToOne', 'api::type.type'>;
+    treshold: Schema.Attribute.Integer;
+    types: Schema.Attribute.Component<'type.type', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -681,14 +583,12 @@ export interface ApiTypeType extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    contents: Schema.Attribute.Relation<'oneToMany', 'api::content.content'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::type.type'> &
       Schema.Attribute.Private;
-    missions: Schema.Attribute.Relation<'oneToMany', 'api::mission.mission'>;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -699,33 +599,6 @@ export interface ApiTypeType extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-  };
-}
-
-export interface ApiUrlUrl extends Struct.CollectionTypeSchema {
-  collectionName: 'urls';
-  info: {
-    displayName: 'Link';
-    pluralName: 'urls';
-    singularName: 'url';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    content: Schema.Attribute.Relation<'manyToOne', 'api::content.content'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::url.url'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -1186,21 +1059,19 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    accessibilities: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::accessibility.accessibility'
+    accessibility: Schema.Attribute.Component<
+      'accessibility.accessibilities',
+      true
     >;
-    achievements: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::achievement.achievement'
-    >;
+    achievements: Schema.Attribute.Component<'achievement.achievement', true>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    circuits: Schema.Attribute.Relation<'manyToMany', 'api::circuit.circuit'>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    current_circuit: Schema.Attribute.Component<'circuit.circuit', false>;
+    current_mission: Schema.Attribute.Component<'mission.mission', false>;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -1250,12 +1121,9 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::accessibility.accessibility': ApiAccessibilityAccessibility;
       'api::achievement.achievement': ApiAchievementAchievement;
-      'api::address.address': ApiAddressAddress;
       'api::circuit.circuit': ApiCircuitCircuit;
-      'api::content.content': ApiContentContent;
       'api::mission.mission': ApiMissionMission;
       'api::type.type': ApiTypeType;
-      'api::url.url': ApiUrlUrl;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

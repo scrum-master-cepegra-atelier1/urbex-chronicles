@@ -11,23 +11,32 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "users_permissions_users": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "circuits"
+    "name": {
+      "type": "string"
     },
-    "missions": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::mission.mission",
-      "mappedBy": "circuit"
+    "description": {
+      "type": "text"
     },
-    "accessibilities": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::accessibility.accessibility",
-      "inversedBy": "circuits"
+    "duration": {
+      "type": "biginteger"
+    },
+    "Missions": {
+      "type": "component",
+      "component": "mission.mission",
+      "repeatable": true
+    },
+    "like": {
+      "type": "integer"
+    },
+    "address": {
+      "type": "component",
+      "component": "adress.address",
+      "repeatable": false
+    },
+    "comments": {
+      "type": "component",
+      "component": "comment.comment",
+      "repeatable": true
     }
   }
 }

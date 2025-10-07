@@ -1,21 +1,12 @@
 {
-  "kind": "collectionType",
-  "collectionName": "missions",
+  "collectionName": "components_mission_missions",
   "info": {
-    "singularName": "mission",
-    "pluralName": "missions",
     "displayName": "Mission"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "title": {
-      "type": "string",
-      "minLength": 5,
-      "required": true,
-      "unique": true
+      "type": "string"
     },
     "description": {
       "type": "text"
@@ -26,15 +17,15 @@
     "longitude": {
       "type": "decimal"
     },
-    "treshold": {
-      "type": "integer"
+    "threshold": {
+      "type": "biginteger"
     },
     "media": {
       "type": "component",
       "component": "media.media",
       "repeatable": false
     },
-    "achievments": {
+    "achievements": {
       "type": "component",
       "component": "achievement.achievement",
       "repeatable": true
@@ -44,5 +35,6 @@
       "component": "type.type",
       "repeatable": true
     }
-  }
+  },
+  "config": {}
 }

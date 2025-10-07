@@ -66,26 +66,28 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "accessibilities": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::accessibility.accessibility",
-      "mappedBy": "user"
-    },
-    "achievements": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::achievement.achievement",
-      "mappedBy": "users"
-    },
-    "circuits": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::circuit.circuit",
-      "mappedBy": "users_permissions_users"
-    },
     "experience": {
       "type": "biginteger"
+    },
+    "accessibility": {
+      "type": "component",
+      "component": "accessibility.accessibilities",
+      "repeatable": true
+    },
+    "current_circuit": {
+      "type": "component",
+      "component": "circuit.circuit",
+      "repeatable": false
+    },
+    "current_mission": {
+      "type": "component",
+      "component": "mission.mission",
+      "repeatable": false
+    },
+    "achievements": {
+      "type": "component",
+      "component": "achievement.achievement",
+      "repeatable": true
     }
   }
 }
