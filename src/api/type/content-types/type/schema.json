@@ -16,6 +16,15 @@
       "minLength": 3,
       "required": true,
       "unique": true
+    },
+    "typeOf": {
+      "type": "enumeration",
+      "default": "text",
+      "enum": [
+        "text",
+        "sphere",
+        "sound"
+      ]
     }
   }
 }
