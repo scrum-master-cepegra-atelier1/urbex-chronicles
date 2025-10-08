@@ -509,21 +509,34 @@ export interface ApiCircuitCircuit extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    address: Schema.Attribute.Component<'adress.address', false>;
+    accessibilities: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::accessibility.accessibility'
+    >;
+    achievement: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::achievement.achievement'
+    >;
     comments: Schema.Attribute.Component<'comment.comment', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
     duration: Schema.Attribute.BigInteger;
-    like: Schema.Attribute.Integer;
+    like: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::circuit.circuit'
     > &
       Schema.Attribute.Private;
-    missions: Schema.Attribute.Component<'mission.mission', true>;
+    missions: Schema.Attribute.Relation<'oneToMany', 'api::mission.mission'>;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     thumbnail: Schema.Attribute.Media<'images'>;
@@ -544,7 +557,10 @@ export interface ApiMissionMission extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    achievements: Schema.Attribute.Component<'achievement.achievement', true>;
+    achievement: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::achievement.achievement'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -566,7 +582,6 @@ export interface ApiMissionMission extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 5;
       }>;
-    types: Schema.Attribute.Component<'type.type', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1062,11 +1077,14 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    accessibility: Schema.Attribute.Component<
-      'accessibility.accessibilities',
-      true
+    accessibilities: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::accessibility.accessibility'
     >;
-    achievements: Schema.Attribute.Component<'achievement.achievement', true>;
+    achievements: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::achievement.achievement'
+    >;
     avatar: Schema.Attribute.Media<'images'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1074,8 +1092,14 @@ export interface PluginUsersPermissionsUser
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    current_circuit: Schema.Attribute.Component<'circuit.circuit', false>;
-    current_mission: Schema.Attribute.Component<'mission.mission', false>;
+    current_circuit: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::circuit.circuit'
+    >;
+    current_mission: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::mission.mission'
+    >;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{

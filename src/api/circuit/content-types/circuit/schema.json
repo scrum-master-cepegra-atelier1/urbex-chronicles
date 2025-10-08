@@ -17,6 +17,9 @@
     "description": {
       "type": "text"
     },
+    "duration": {
+      "type": "biginteger"
+    },
     "thumbnail": {
       "type": "media",
       "multiple": false,
@@ -25,26 +28,29 @@
         "images"
       ]
     },
-    "duration": {
-      "type": "biginteger"
+    "like": {
+      "type": "integer",
+      "min": 0
     },
     "missions": {
-      "type": "component",
-      "component": "mission.mission",
-      "repeatable": true
-    },
-    "like": {
-      "type": "integer"
-    },
-    "address": {
-      "type": "component",
-      "component": "adress.address",
-      "repeatable": false
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::mission.mission"
     },
     "comments": {
       "type": "component",
       "component": "comment.comment",
       "repeatable": true
+    },
+    "accessibilities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::accessibility.accessibility"
+    },
+    "achievement": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::achievement.achievement"
     }
   }
 }

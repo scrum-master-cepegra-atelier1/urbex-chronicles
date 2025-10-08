@@ -81,25 +81,25 @@
       "default": "0",
       "min": "0"
     },
-    "accessibility": {
-      "type": "component",
-      "component": "accessibility.accessibilities",
-      "repeatable": true
+    "achievements": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::achievement.achievement"
+    },
+    "accessibilities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::accessibility.accessibility"
     },
     "current_circuit": {
-      "type": "component",
-      "component": "circuit.circuit",
-      "repeatable": false
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::circuit.circuit"
     },
     "current_mission": {
-      "type": "component",
-      "component": "mission.mission",
-      "repeatable": false
-    },
-    "achievements": {
-      "type": "component",
-      "component": "achievement.achievement",
-      "repeatable": true
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::mission.mission"
     }
   }
 }
