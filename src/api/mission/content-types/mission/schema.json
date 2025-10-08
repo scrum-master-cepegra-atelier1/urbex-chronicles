@@ -34,15 +34,10 @@
       "component": "media.media",
       "repeatable": false
     },
-    "achievements": {
-      "type": "component",
-      "component": "achievement.achievement",
-      "repeatable": true
-    },
-    "types": {
-      "type": "component",
-      "component": "type.type",
-      "repeatable": true
+    "achievement": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::achievement.achievement"
     }
   }
 }

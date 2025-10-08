@@ -55,7 +55,10 @@ export interface CommentComment extends Struct.ComponentSchema {
     avatar: Schema.Attribute.Media<'images'>;
     comment_at: Schema.Attribute.DateTime;
     content: Schema.Attribute.Text;
-    user_name: Schema.Attribute.String;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
